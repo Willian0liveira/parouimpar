@@ -31,107 +31,99 @@ class _PrincipalState extends State<Principal> {
   String imparPar = "Par ou impar ?";
   int pointPar = 0;
   int pointImpar = 0;
-
-
-
-
-  void mudaResultado(){
-    String jogadorUmVence = widget.jogadorUm;
-    String jogadorDoisVence = widget.jogadorDois;
-    setState(() {
-      pointResult = Random().nextInt(9)+1;
-      if(pointResult==2||pointResult==4||pointResult==6||pointResult==8||pointResult==10){
-        pointPar++;
-        imparPar = "Par";
-      }else{
-        pointImpar++;
-        imparPar = "Impar";
-      }
-    });
-
-    if(pointPar==10){
-      pointPar=0;
-      pointImpar =0;
-      pointResult = 0;
-      imparPar="Par ou Impar ?";
-    showDialog(barrierColor: Colors.redAccent,barrierDismissible: false,context: context, builder: (context)=>AlertDialog(
-      backgroundColor: Colors.redAccent,
-      elevation: 0,
-      content: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.redAccent,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 200),
-              width: 400,
-              height: 100,
-              child: Image.asset('imagens/trofeu.png',width: 500,height: 500,fit: BoxFit.contain,),
-            ),
-            Text("Vencedor !",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
-            Container(
-              margin: EdgeInsets.only(top: 80),
-              child:  Text(jogadorUmVence,style: TextStyle(fontSize: 55,color: Colors.yellowAccent,fontWeight: FontWeight.bold),),
-            ),
-
-            
-          ],
-        ),
-      ),
-
-    ));
-    }else if(pointImpar==10){
-      pointImpar=0;
-      pointPar = 0;
-      pointResult =0;
-      imparPar = "Par ou Impar ?";
-      showDialog(barrierColor: Colors.redAccent,barrierDismissible: false,context: context, builder: (context)=>AlertDialog(
-        backgroundColor: Colors.redAccent,
-        elevation: 0,
-        content: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.redAccent,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 200),
-                width: 400,
-                height: 100,
-                child: Image.asset('imagens/trofeu.png'),
-              ),
-              Text("Vencedor !",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
-              Container(
-                margin: EdgeInsets.only(top: 80),
-                child:  Text(jogadorDoisVence,style: TextStyle(fontSize: 55,color: Colors.yellowAccent,fontWeight: FontWeight.bold,),),
-              ),
-
-            ],
-          ),
-        ),
-
-      ));
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
+  bool parImparSelected= true;
+  bool imparParSelected = false;
 
   @override
   Widget build(BuildContext context) {
+
+
+    void mudaResultado(){
+      String jogadorUmVence = widget.jogadorUm;
+      String jogadorDoisVence = widget.jogadorDois;
+      setState(() {
+        pointResult = Random().nextInt(9)+1;
+        if(pointResult==2 && parImparSelected==true||pointResult==4 && parImparSelected==true||pointResult==6 && parImparSelected==true||pointResult==8 && parImparSelected==true||pointResult==10 && parImparSelected==true){
+          pointPar++;
+          imparPar = "Par";
+        }else{
+          pointImpar++;
+          imparPar = "Impar";
+        }
+      });
+
+
+
+      if(pointPar==10){
+        pointPar=0;
+        pointImpar =0;
+        pointResult = 0;
+        imparPar="Par ou Impar ?";
+        showDialog(barrierColor: Colors.redAccent,barrierDismissible: false,context: context, builder: (context)=>AlertDialog(
+          backgroundColor: Colors.redAccent,
+          elevation: 0,
+          content: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.redAccent,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 200),
+                  width: 400,
+                  height: 100,
+                  child: Image.asset('imagens/trofeu.png',width: 500,height: 500,fit: BoxFit.contain,),
+                ),
+                Text("Vencedor !",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
+                Container(
+                  margin: EdgeInsets.only(top: 80),
+                  child:  Text(jogadorUmVence,style: TextStyle(fontSize: 55,color: Colors.yellowAccent,fontWeight: FontWeight.bold),),
+                ),
+
+
+              ],
+            ),
+          ),
+
+        ));
+      }else if(pointImpar==10){
+        pointImpar=0;
+        pointPar = 0;
+        pointResult =0;
+        imparPar = "Par ou Impar ?";
+        showDialog(barrierColor: Colors.redAccent,barrierDismissible: false,context: context, builder: (context)=>AlertDialog(
+          backgroundColor: Colors.redAccent,
+          elevation: 0,
+          content: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.redAccent,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 200),
+                  width: 400,
+                  height: 100,
+                  child: Image.asset('imagens/trofeu.png'),
+                ),
+                Text("Vencedor !",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold),),
+                Container(
+                  margin: EdgeInsets.only(top: 80),
+                  child:  Text(jogadorDoisVence,style: TextStyle(fontSize: 55,color: Colors.yellowAccent,fontWeight: FontWeight.bold,),),
+                ),
+
+              ],
+            ),
+          ),
+
+        ));
+      }
+    }
+
+
+
     return Scaffold(
       backgroundColor: Colors.redAccent,
       body: SingleChildScrollView(
@@ -152,6 +144,7 @@ class _PrincipalState extends State<Principal> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+
 
                       Container(
                         alignment: Alignment.topCenter,
@@ -212,6 +205,16 @@ class _PrincipalState extends State<Principal> {
                           margin: EdgeInsets.only(top: 20),
                           child:Text(pointPar.toString(),style: TextStyle(fontSize: 80),),
                         ),
+                        Switch(
+                          onChanged: (value){
+                            setState(() {
+                              parImparSelected = value;
+                            });
+                          },
+                          value: parImparSelected,
+                        ),
+
+
                       ],
                     ),
                   ),
@@ -239,6 +242,17 @@ class _PrincipalState extends State<Principal> {
                           margin: EdgeInsets.only(top: 20),
                           child:Text(pointImpar.toString(),style: TextStyle(fontSize: 80),),
                         ),
+
+                        Switch(
+                          onChanged: (value){
+                            setState(() {
+                              imparParSelected = value;
+                            });
+                          },
+                          value: imparParSelected,
+                        ),
+
+
                       ],
                     ),
                   ),
